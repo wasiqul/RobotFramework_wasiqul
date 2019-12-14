@@ -5,15 +5,15 @@ Test Teardown    Close Browser
 Default Tags    Sanity
 
 *** Variables ***
-${url}    https://opensource-demo.orangehrmlive.com/
+${url}    https://sso.autobill.com/
 @{credentials}    Admin    admin123
-&{credential}    username=Admin    password=admin123
+&{credential}    username=implementer@4e78d51f    password=autobill
 
 *** Keywords ***
 LoginKW
-    Input Text    id=txtUsername    @{credentials}[0]    
-    Input Password    id=txtPassword    &{credential}[password]
-    Click Button    id=btnLogin
+    Input Text    id=email    &{credential}[username]  
+    Input Password    id=password    &{credential}[password]
+    Click Button    class=login-button
 
 *** Test Cases ***
     
@@ -22,9 +22,10 @@ LoginSeleniumTest
     Set Browser Implicit Wait    5
     LoginKW
     Sleep    5
-    Click Element    id=welcome    
-    Click Link    link=Logout        
-    Log    Login than Logout from OrangeHRM
+    Click Element    class=place-holder-image 
+    Sleep    5 
+    Click Element    xpath=//span[contains(text(),'Logout')]   
+    Log    Login than Logout from Autobill
     Log    this test executed by %{username} in %{os}
     
 *** Comments ***
