@@ -1,12 +1,12 @@
 *** Settings ***
-Library    SeleniumLibrary    
-Test Setup    Open Browser    ${url}    chrome
-Test Teardown    Close Browser
+Library    SeleniumLibrary 
+Library    String       
+Suite Setup    Open Browser    ${url}    chrome
+Suite Teardown    Close Browser
 Default Tags    Sanity
 
 *** Variables ***
 ${url}    https://sso.autobill.com/
-@{credentials}    Admin    admin123
 &{credential}    username=implementer@4e78d51f    password=autobill
 
 *** Keywords ***
@@ -22,26 +22,35 @@ LogoutKW
     Click Element       xpath=//span[contains(text(),'Logout')]   
     
 CreateAccountKW
+    ${email-number}     Generate Random String  8  [NUMBERS]
+    [Return]            ${email-number}
+    
     Click Element       xpath=//span[@class='icon lnr lnr-plus-circle']
     Sleep               2
     Click Element       xpath=//span[@class='new-text'][contains(text(),'Account')]    
     Input Text          name=name    WasiqulAutobot    
-    Input Text          name=emailAddress    abcd2@yelo.com
+    Input Text          name=emailAddress    abc${email-number}@yoho.com
     Click Button        xpath=//button[@class='submit-button common-tab-actions'] 
     Sleep               5  
 
 *** Test Cases ***
     
-LoginSeleniumTest
-    [Documentation]     This is my first sample test for login
+LoginAutobillTest
+    [Documentation]     This is Autobill login test case
     
     Set Browser Implicit Wait    5
     
     LoginKW
     Log    Loging in to Autobill
+
+CreateAccountAutobillTest
+    [Documentation]     This is Autobill Create Account test case
     
     CreateAccountKW
     Log    Creating an account
+
+LogoutAutobillTest
+    [Documentation]     This is Autobill logout test case
     
     LogoutKW
     Log    Loging out from Autobill
