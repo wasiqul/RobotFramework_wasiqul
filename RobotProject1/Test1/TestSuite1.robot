@@ -26,13 +26,43 @@ CreateAccountKW
     [Return]            ${email-number}
     
     Click Element       xpath=//span[@class='icon lnr lnr-plus-circle']
-    Sleep               2
+    Sleep               5
     Click Element       xpath=//span[@class='new-text'][contains(text(),'Account')]    
     Input Text          name=name    WasiqulAutobot    
     Input Text          name=emailAddress    abc${email-number}@yoho.com
     Click Button        xpath=//button[@class='submit-button common-tab-actions'] 
     Sleep               5  
+    
+CreateProductKW
+    Click Element           class=place-holder-image 
+    Sleep                   3
+    Click Element           xpath=//span[contains(text(),'Products')] 
+    Sleep                   5
+    Double Click Element    xpath=//span[@class='new-item toolbar-icon create skip-ajax-validation tab-opener']//span[@class='icon create']
+    Sleep                   5
+    Click Element           xpath=//input[contains(@placeholder,'Product Name')]   
+    Input Text              name=name    WasiqulAutobotProduct   
+    Click Button            xpath=//button[contains(@class,'submit-button common-tab-actions')]
+    Sleep                   3  
 
+CreateRateKW
+   Maximize Browser Window
+   Scroll Element Into View    xpath=//div[contains(@class,'create-for-no-item product-create rate')]//div[contains(@class,'create-new add-rate')][contains(text(),'Add Rate')]
+   Sleep                       3
+   Click Element               xpath=//div[contains(@class,'create-for-no-item product-create rate')]//div[contains(@class,'create-new add-rate')][contains(text(),'Add Rate')]
+   Sleep                       3
+   Scroll Element Into View    xpath=//div[@class='new-list new-list-initialized boundary-check ps ps--theme_default move-action-menu-done initialized hide_this_dropdown_applicable']//span[@class='new-text'][contains(text(),'Metered Rate')]
+   Sleep                       3
+   Click Element               xpath=//div[contains(@class,'create-for-no-item product-create rate')]//div[contains(@class,'create-new add-rate')][contains(text(),'Add Rate')]
+   Sleep                       3
+   Click Element               xpath=//div[contains(@class,'create-for-no-item product-create rate sdfcddm need-to-hide-dropdown-panel')]//li[2]
+   Sleep                       3
+   Scroll Element Into View    xpath=//td[contains(@class,'rate_cell amount required-field')]//input[contains(@name,'price')]
+   Click Element               xpath=//td[contains(@class,'rate_cell amount required-field')]//input[contains(@name,'price')] 
+   Input Text                  name=price    50   
+   Click Button                xpath=//button[contains(@class,'submit-button')]
+   Sleep                       5 
+   
 *** Test Cases ***
     
 LoginAutobillTest
@@ -48,6 +78,16 @@ CreateAccountAutobillTest
     
     CreateAccountKW
     Log    Creating an account
+    
+CreateProducttAutobillTest
+   [Documentation]     This is Autobill Create Productt test case
+   
+   CreateProductKW
+   Log    Creating a Product
+   
+   CreateRateKW
+   Log    Creating a Rate
+
 
 LogoutAutobillTest
     [Documentation]     This is Autobill logout test case
