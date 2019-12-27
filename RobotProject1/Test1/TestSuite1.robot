@@ -27,7 +27,7 @@ CreateAccountKW
     
     Click Element       xpath=//span[@class='icon lnr lnr-plus-circle']
     Sleep               5
-    Click Element       xpath=//span[@class='new-text'][contains(text(),'Account')]    
+    Click Element       xpath=//li[@class='new-item create-new-account-link skip-ajax-validation tab-opener']//span[@class='new-text'][contains(text(),'Account')]   
     Input Text          name=name    WasiqulAutobot    
     Input Text          name=emailAddress    abc${email-number}@yoho.com
     Click Button        xpath=//button[@class='submit-button common-tab-actions'] 
@@ -38,7 +38,7 @@ CreateProductKW
     Sleep                   3
     Click Element           xpath=//span[contains(text(),'Products')] 
     Sleep                   5
-    Double Click Element    xpath=//span[@class='new-item toolbar-icon create skip-ajax-validation tab-opener']//span[@class='icon create']
+    Double Click Element    xpath=//span[@class='icon create']
     Sleep                   5
     Click Element           xpath=//input[contains(@placeholder,'Product Name')]   
     Input Text              name=name    WasiqulAutobotProduct   
@@ -73,12 +73,6 @@ LoginAutobillTest
     LoginKW
     Log    Loging in to Autobill
 
-CreateAccountAutobillTest
-    [Documentation]     This is Autobill Create Account test case
-    
-    CreateAccountKW
-    Log    Creating an account
-    
 CreateProducttAutobillTest
    [Documentation]     This is Autobill Create Productt test case
    
@@ -88,6 +82,16 @@ CreateProducttAutobillTest
    CreateRateKW
    Log    Creating a Rate
 
+CreateAccountAutobillTest
+    [Documentation]     This is Autobill Create Account test case
+    
+    CreateAccountKW
+    Log    Creating an account
+    
+CreateOrderTest
+    [Documentation]    This is Autobill Create Order test case
+     
+    Log    Creating an order
 
 LogoutAutobillTest
     [Documentation]     This is Autobill logout test case
@@ -96,16 +100,5 @@ LogoutAutobillTest
     Log    Loging out from Autobill
     
     Log    this test executed by %{username} in %{os}
-    
-*** Comments ***
-MyFirstTest
-    Log    Hello World    
-    
-FirstSeleniumTest
-    
-    Set Browser Implicit Wait    5
-    Input Text    name=q    wasiqul   
-    Sleep    5
-    Press Keys    name=btnK    ENTER
-    Sleep    5    
+       
     
